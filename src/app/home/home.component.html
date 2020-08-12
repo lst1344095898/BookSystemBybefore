@@ -1,0 +1,13 @@
+<div style="position: absolute; top: 25%; left: 45%;">
+    <form [formGroup]='testForm'>
+        <div class="form-group">
+            <label>TestName</label>
+            <input class="form-control" type="text" formControlName='testName' required (ngModelChange)="errorClear('testName')">
+            <div *ngIf='message.testName.check'>
+                {{message.testName.error}}
+            </div>
+        </div>
+
+        <button (click)="onclick()"></button>
+    </form>
+</div>

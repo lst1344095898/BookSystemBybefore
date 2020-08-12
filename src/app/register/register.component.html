@@ -1,0 +1,106 @@
+<body class="body_back">
+    <div class="alert alert-danger" *ngIf="errorMessage != null">{{errorMessage}}</div>
+    <div class="form-signin">
+        <form [formGroup]='registerForm'>
+            <div class="form-group">
+                <label>UserName</label>
+                <input type="text" class="form-control" formControlName="username" (ngModelChange)="errorClear('username')">
+                <div class="red_backcolor " *ngIf='message.username.check'>
+                    {{message.username.error}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Pssword</label>
+                <input type="password" class="form-control" formControlName="password" (ngModelChange)="errorClear('password')">
+                <div class="red_backcolor " *ngIf='message.password.check'>
+                    {{message.password.error}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label>密码确认</label>
+                <input type="password" class="form-control" formControlName="passwords" (ngModelChange)="errorClear('passwords')">
+                <div class="red_backcolor " *ngIf='message.passwords.check'>
+                    {{message.passwords.error}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Email address</label>
+                <input type="email" class="form-control" placeholder="Email" formControlName="email" (ngModelChange)="errorClear('email')">
+                <div class="red_backcolor " *ngIf='message.email.check'>
+                    {{message.email.error}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label>birthday</label>
+                <input type="datetime-local" class="form-control" formControlName="birthday" (ngModelChange)="errorClear('birthday')">
+                <div class="red_backcolor " *ngIf='message.birthday.check'>
+                    {{message.birthday.error}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label>年纪</label>
+                <select class="form-control" formControlName="grade" (ngModelChange)="errorClear('grade')">
+                <option>--请选择--</option>
+                <option value="大1年级">大1年级</option>
+                <option value="大2年级">大2年级</option>
+                <option value="大3年级">大3年级</option>
+                <option value="大4年级">大4年级</option>
+              </select>
+                <div class="red_backcolor " *ngIf='message.grade.check'>
+                    {{message.grade.error}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label>选择用户</label>
+                <select class="form-control" formControlName="user_code" (ngModelChange)="errorClear('user_code')">
+                <option>--请选择--</option>
+                <option value="1">管理员</option>
+                <option value="0">普通用户</option>
+              </select>
+                <div class="red_backcolor " *ngIf='message.user_code.check'>
+                    {{message.user_code.error}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label>sex</label>
+                <div>
+                    <label class="radio-inline">
+                <input type="radio"   value="男" formControlName="sex"  (ngModelChange)="errorClear('sex')"> 男
+            </label>
+                    <label class="radio-inline">
+                <input type="radio"   value="女" formControlName="sex" (ngModelChange)="errorClear('sex')"> 女
+            </label>
+                    <div class="red_backcolor " *ngIf='message.sex.check'>
+                        {{message.sex.error}}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" id="interest">
+                <label>兴趣</label>
+                <div>
+                    <label class="checkbox-inline">
+                    <input type="checkbox" name="inlineCheckbox1" value="唱跳" (ngModelChange)="errorClear('interest')"> 唱跳
+                  </label>
+                    <label class="checkbox-inline">
+                    <input type="checkbox" name="inlineCheckbox2" value="rap" (ngModelChange)="errorClear('interest')"> rap
+                  </label>
+                    <label class="checkbox-inline">
+                    <input type="checkbox" name="inlineCheckbox3" value="游泳" (ngModelChange)="errorClear('interest')"> 游泳
+                </label>
+                    <div class="red_backcolor " *ngIf="message.interest.check">
+                        {{message.interest.error}}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>自我介绍</label>
+                <input type="text" class="form-control" formControlName="introduce" (ngModelChange)="errorClear('introduce')">
+                <div class="red_backcolor " *ngIf='message.introduce.check'>
+                    {{message.introduce.error}}
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="right_img" (click)="onClick()"></div>
+    <div class="left_img" (click)="goback()"></div>
+</body>

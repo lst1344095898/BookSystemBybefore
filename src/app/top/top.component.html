@@ -1,0 +1,84 @@
+<body class="back_img" style="margin: 0px;">
+    <div class="hear_div"><span class="hear_text">NameSoHard's library</span>
+        <div class="head_portrait">
+            <img id="heard_img" class="hear_img_before" alt="" src="" (mouseenter)="showUserInfo()">
+            <div id="userInfo" class="user_info">
+                <img class="hear_img_after" alt="">
+                <ul class="list-group heard_ul" style="text-align: center;">
+                    <li class="list-group-item" style="text-decoration:none;"></li>
+                    <li class="list-group-item">{{userInfoHeard.username}}</li>
+                    <li class="list-group-item">{{userInfoHeard.grade}}</li>
+                    <li class="list-group-item">{{userInfoHeard.user_code}}</li>
+                    <li class="list-group-item">
+                        <button class="btn btn-success" (click)="out()">退出</button>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div id="back_div" (mousemove)="exitShow()"></div>
+    </div>
+    <div class="hear_Line"></div>
+    <div class="nav_bar">
+        <div *ngIf="show">
+            <ul class="nav nav-pills left_meun_div">
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '1' }" (click)="tagClick('1')">查询借阅</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '2' }" (click)="tagClick('2')">归还</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '3' }" (click)="tagClick('3')">图书管理</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '4' }" (click)="tagClick('4')">日志</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '5' }" (click)="tagClick('5')">排行榜</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '6' }" (click)="tagClick('6')">用户管理</li>
+            </ul>
+        </div>
+        <div *ngIf="noShow">
+            <ul class="nav nav-pills left_meun_div">
+                <li class="list-group-item nav_button_color" [ngClass]="{'active_li': type === '1' }" (click)="tagClick('1')">图书借阅</li>
+                <li class="list-group-item nav_button_color" [ngClass]="{'active_li': type === '2' }" (click)="tagClick('2')">我的书架</li>
+                <li class="list-group-item nav_button_color" [ngClass]="{'active_li': type === '3' }" (click)="tagClick('3')">个人信息</li>
+                <li class="list-group-item nav_button_color" [ngClass]="{'active_li': type === '4' }" (click)="tagClick('4')">排行</li>
+            </ul>
+        </div>
+    </div>
+    <div class="rigth_meun_div">
+        <div class="rigth_content_div">
+            <div class="rigth_content_form" style="margin-left: 100px; margin-top: 30px; font-size: 20xp;">
+                <div style="float: left; border: 1px solid #dddddd; margin-right: 200px;">
+                    <h1>当月热门图书</h1>
+                    <div class="table-responsive " *ngIf="bookTops">
+                        <table id="font_table" class="table">
+                            <thead>
+                                <th>书名</th>
+                                <th>作者名</th>
+                                <th>借阅次数</th>
+                            </thead>
+                            <tbody>
+                                <tr style="text-align: center;" *ngFor="let bookTop of bookTops">
+                                    <th>{{bookTop.bookName}}</th>
+                                    <th>{{bookTop.authorName}}</th>
+                                    <th>{{bookTop.borrowTimes}}</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div style="float: left; border: 1px solid #dddddd;">
+                    <h1>当月读者排行榜</h1>
+                    <div class="table-responsive " *ngIf="userTops">
+                        <table id="font_table" class="table" style="text-align: center;">
+                            <thead>
+                                <th>读者</th>
+                                <th>借阅次数</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let userTop of userTops">
+                                    <th>{{userTop.userName}}</th>
+                                    <th>{{userTop.borrowTimes}}</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

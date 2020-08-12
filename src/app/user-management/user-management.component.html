@@ -1,0 +1,157 @@
+<body class="back_img" style="margin: 0px;">
+    <div class="hear_div"><span class="hear_text">NameSoHard's library</span>
+        <div class="head_portrait">
+            <img id="heard_img" class="hear_img_before" alt="" src="" (mouseenter)="showUserInfo()">
+            <div id="userInfo" class="user_info">
+                <img class="hear_img_after" alt="">
+                <ul class="list-group heard_ul" style="text-align: center;">
+                    <li class="list-group-item" style="text-decoration:none;"></li>
+                    <li class="list-group-item">{{userInfoHeard.username}}</li>
+                    <li class="list-group-item">{{userInfoHeard.grade}}</li>
+                    <li class="list-group-item">{{userInfoHeard.user_code}}</li>
+                    <li class="list-group-item">
+                        <button class="btn btn-success" (click)="out()">退出</button>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div id="back_div" (mousemove)="exitShow()"></div>
+    </div>
+    <div class="hear_Line"></div>
+    <div class="nav_bar">
+        <div class="">
+            <ul class="nav nav-pills left_meun_div">
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '1' }" (click)="tagClick('1')">查询借阅</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '2' }" (click)="tagClick('2')">归还</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '3' }" (click)="tagClick('3')">图书管理</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '4' }" (click)="tagClick('4')">日志</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '5' }" (click)="tagClick('5')">排行榜</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '6' }" (click)="tagClick('6')">用户管理</li>
+            </ul>
+        </div>
+    </div>
+    <div class=" rigth_meun_div">
+        <div class="rigth_content_div ">
+            <form class="container form-horizontal  rigth_content_form">
+                <div>
+                    <div class="input-group input_width float_left">
+                        <span class="input-group-addon">用户ID</span>
+                        <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="pram.userid">
+                    </div>
+                    <div class="input-group input_width float_left">
+                        <span class="input-group-addon">用户名</span>
+                        <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="pram.username">
+                    </div>
+                </div>
+                <div class="center-block btn-area">
+                    <button class="btn  btn-success" (click)="getUserAll()">检索</button>
+                    <button class="btn  btn-default" (click)="reset()">新增</button>
+                </div>
+            </form>
+            <!-- 表格数据展示 -->
+            <div class="rigth_content_table table-responsive " *ngIf="users">
+                <table id="table_right" class="table ">
+                    <thead>
+                        <th>用户ID</th>
+                        <th>用户名</th>
+                        <th>用户邮箱</th>
+                        <th>查看</th>
+                        <th>操作</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of users">
+                            <th>{{user.userid}}</th>
+                            <th>{{user.username}}</th>
+                            <th>{{user.e_mail}}</th>
+                            <th><button (click)="lookUser(template, user)">详情</button></th>
+                            <th><button (click)="deletUser(user)">删除</button></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="page_table">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li [ngClass]="{'active': pageNew === page }" *ngFor="let page of pageArry">
+                            <span (click)="changPageByAfter(page)">{{page+1}}</span></li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div id="back_reacll" class="back">
+    </div>
+    <div id="DeletWindows" class="DeletWindows">
+        <div class="alert alert-danger" role="alert" style="text-align: center;">
+            <span>是否对用户id为："{{deletUserInfo.userid}}",<br>用户名为：{{deletUserInfo.username}}进行删除</span><br>
+        </div>
+        <button class="btn btn-success dropdown-toggle" (click)="Delet()" style="margin-left: 190px; margin-right: 30px;">是</button>
+        <button class="btn btn-success dropdown-toggle" (click)="returnBack()">否</button>
+    </div>
+
+    <ng-template #template>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">用户信息</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+        </div>
+        <div class="modal-content">
+            <form action="" class="form-horizontal ">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">用户名</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" [(ngModel)]="userInfo.username" [ngModelOptions]="{standalone: true}" (ngModelChange)="changByInput(1)">
+                    </div>
+                </div>
+                <div class=" form-group ">
+                    <label class="col-sm-2 control-label ">电子邮件</label>
+                    <div class="col-sm-8 ">
+                        <input type="text " class="form-control " [(ngModel)]="userInfo.e_mail " [ngModelOptions]="{standalone: true} " (ngModelChange)="changByInput(3)">
+                    </div>
+                </div>
+                <div class=" form-group ">
+                    <label class="col-sm-2 control-label ">生日</label>
+                    <div class="col-sm-8 ">
+                        <input type="text " class="form-control " [(ngModel)]="userInfo.birthday " [ngModelOptions]="{standalone: true} " (ngModelChange)="changByInput(3)">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label for=" " class="col-sm-2 control-label ">性别</label>
+                    <div class="col-sm-8 ">
+                        <input type="text " class="form-control " [(ngModel)]="userInfo.sex " [ngModelOptions]="{standalone: true} " (ngModelChange)="changByInput(7)">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label for=" " class="col-sm-2 control-label ">年级</label>
+                    <div class="col-sm-8 ">
+                        <input type="text " class="form-control " [(ngModel)]="userInfo.sex " [ngModelOptions]="{standalone: true} " (ngModelChange)="changByInput(7)">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label for=" " class="col-sm-2 control-label ">兴趣</label>
+                    <div class="col-sm-8 ">
+                        <input type="text " class="form-control " [(ngModel)]="userInfo.interest " [ngModelOptions]="{standalone: true} ">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label for=" " class="col-sm-2 control-label ">自我介绍</label>
+                    <div class="col-sm-8 ">
+                        <input type="text " class="form-control " [(ngModel)]="userInfo.introduce " [ngModelOptions]="{standalone: true} ">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </ng-template>
+</body>

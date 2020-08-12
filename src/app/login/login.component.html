@@ -1,0 +1,60 @@
+<body class="body_back">
+    <div class="alert alert-danger" *ngIf="errorMessage != null">{{errorMessage}}</div>
+    <div class="login_content">
+        <h2 style="text-align: center;">NameSoHard's library</h2>
+        <div class="form-signin">
+            <form [formGroup]='LoginForm'>
+                <h1 class="h3 mb-3 font-weight-normal text_center">登录</h1>
+                <div class="form-group">
+                    <label>username</label>
+                    <input type="text" class="form-control" id="username" formControlName='userName' (ngModelChange)="errorClear('userName')" placeholder=" username ">
+                    <div *ngIf='message.userName.check'>
+                        {{message.userName.error}}
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label>Password</label>
+                    <input type="password" class="form-control " id="password " formControlName='password' (ngModelChange)="errorClear('password')" placeholder="password">
+                    <div *ngIf='message.password.check'>
+                        {{message.password.error}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <a (click)="changePassword()">?忘记密码</a><br>
+                    <button type="submit" class="btn btn-default" style="margin-left: 40px; margin-right: 40px;" (click)="onClick()">登录</button>
+                    <button type="submit" class="btn btn-default" (click)="register()">注册</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- 背景 -->
+    <div id="back" class="back"></div>
+    <div class="suspended_window" id="passwordWindow">
+        <div class="div_center">
+            <h3>修改密码</h3>
+            <div class="form-group ">
+                <label>请输入新的密码</label>
+                <input type="password" id="passwordInput" class="form-control e_mailWidth" placeholder="password">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default" (click)="editPassword()">确定</button>
+                <button type="submit" class="btn btn-default" (click)="cancel()">取消</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="suspended_window" id="emailWindow">
+        <div class="div_center">
+            <h3>确认邮箱</h3>
+            <div class="form-group ">
+                <label>请输入要重置的邮箱账号</label>
+                <input type="text " id="e_mailInput" class="form-control e_mailWidth" placeholder="E_mail">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default" (click)="e_mailJudge()">确定</button>
+                <button type="submit" class="btn btn-default" (click)="cancel()">取消</button>
+            </div>
+        </div>
+    </div>
+</body>

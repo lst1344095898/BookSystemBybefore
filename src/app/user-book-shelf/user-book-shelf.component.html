@@ -1,0 +1,53 @@
+<body class="back_img" style="margin: 0px;">
+    <div class="hear_div"><span class="hear_text">NameSoHard's library</span>
+        <div class="head_portrait">
+            <img id="heard_img" class="hear_img_before" alt="" src="" (mouseenter)="showUserInfo()">
+            <div id="userInfo" class="user_info">
+                <img class="hear_img_after" alt="">
+                <ul class="list-group heard_ul" style="text-align: center;">
+                    <li class="list-group-item" style="text-decoration:none;"></li>
+                    <li class="list-group-item">{{userInfoHeard.username}}</li>
+                    <li class="list-group-item">{{userInfoHeard.grade}}</li>
+                    <li class="list-group-item">{{userInfoHeard.user_code}}</li>
+                    <li class="list-group-item">
+                        <button class="btn btn-success" (click)="out()">退出</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="back_div" (mousemove)="exitShow()"></div>
+    </div>
+    <div class="hear_Line"></div>
+    <div class="nav_bar">
+        <div class="">
+            <ul class="nav nav-pills left_meun_div">
+                <li class="list-group-item nav_button_color margin_left_small" [ngClass]="{'btn-primary': type === '1' }" (click)="tagClick('1')">图书借阅</li>
+                <li class="list-group-item nav_button_color margin_left_small" [ngClass]="{'btn-primary': type === '2' }" (click)="tagClick('2')">我的书架</li>
+                <li class="list-group-item nav_button_color margin_left_small" [ngClass]="{'btn-primary': type === '3' }" (click)="tagClick('3')">个人信息</li>
+                <li class="list-group-item nav_button_color margin_left_small" [ngClass]="{'btn-primary': type === '4' }" (click)="tagClick('4')">排行</li>
+            </ul>
+        </div>
+    </div>
+    <div class="table_size">
+        <div class="rigth_content_table table-responsive" *ngIf="borrowInfos">
+            <table id="table_right" class="table">
+                <thead>
+                    <th>图书id</th>
+                    <th>图书名字</th>
+                    <th>作者</th>
+                    <th>借阅时间</th>
+                    <th style="width: 60px;">操作</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let borrowInfo of borrowInfos">
+                        <th>{{borrowInfo.bookid}}</th>
+                        <th>{{borrowInfo.bookName}}</th>
+                        <th>{{borrowInfo.authorName}}</th>
+                        <th>{{borrowInfo.startTime}}</th>
+                        <button class="btn btn-primary" (click)="delay(borrowInfo)">借阅延期</button>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,128 @@
+<body class="back_img" style="margin: 0px;">
+    <div class="hear_div"><span class="hear_text">NameSoHard's library</span>
+        <div class="head_portrait">
+            <img id="heard_img" class="hear_img_before" alt="" src="" (mouseenter)="showUserInfo()">
+            <div id="userInfo" class="user_info">
+                <img class="hear_img_after" alt="">
+                <ul class="list-group heard_ul" style="text-align: center;">
+                    <li class="list-group-item" style="text-decoration:none;"></li>
+                    <li class="list-group-item">{{userInfoHeard.username}}</li>
+                    <li class="list-group-item">{{userInfoHeard.grade}}</li>
+                    <li class="list-group-item">{{userInfoHeard.user_code}}</li>
+                    <li class="list-group-item">
+                        <button class="btn btn-success" (click)="out()">退出</button>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div id="back_div" (mousemove)="exitShow()"></div>
+    </div>
+    <div class="hear_Line"></div>
+    <div class="nav_bar">
+        <div class="">
+            <ul class="nav nav-pills left_meun_div">
+                <li class="list-group-item nav_button_color margin_left_small" [ngClass]="{'btn-primary': type === '1' }" (click)="tagClick('1')">图书借阅</li>
+                <li class="list-group-item nav_button_color margin_left_small" [ngClass]="{'btn-primary': type === '2' }" (click)="tagClick('2')">我的书架</li>
+                <li class="list-group-item nav_button_color margin_left_small" [ngClass]="{'btn-primary': type === '3' }" (click)="tagClick('3')">个人信息</li>
+                <li class="list-group-item nav_button_color margin_left_small" [ngClass]="{'btn-primary': type === '4' }" (click)="tagClick('4')">排行</li>
+            </ul>
+        </div>
+    </div>
+    <div class="ul_size" *ngIf="user">
+        <ul class="list-group ul_style">
+            <li class="list-group-item"><span>用户名：</span>{{user.username}}</li>
+            <li class="list-group-item"><span>电子邮件: </span>{{user.e_mail}}</li>
+            <li class="list-group-item"><span>生日: </span> {{user.birthday}}</li>
+            <li class="list-group-item"><span>性别: </span>{{user.sex}}</li>
+            <li class="list-group-item"><span>年级: </span>{{user.grade}}</li>
+            <li class="list-group-item"><span>兴趣: </span>{{user.interest}}</li>
+            <li class="list-group-item"><span>自我介绍: </span>{{user.introduce}}</li>
+            <li class="list-group-item"><button class="btn btn-success" style="margin-left: 260px;" (click)="Administration(template)">管理</button></li>
+        </ul>
+    </div>
+
+    <ng-template #template>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">信息管理</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide();No()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-content">
+            <form action="" class="form-horizontal ">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">用户名</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" [(ngModel)]="userEdit.username" [ngModelOptions]="{standalone: true}" (ngModelChange)="changByInput(1)">
+                        <div class="red_backcolor " *ngIf="messages.error[1] ">
+                            {{messages.errorMessages}}
+                        </div>
+                    </div>
+                </div>
+                <div class=" form-group ">
+                    <label class="col-sm-2 control-label ">电子邮件</label>
+                    <div class="col-sm-8 ">
+                        <input type="text " class="form-control " [(ngModel)]="userEdit.e_mail " [ngModelOptions]="{standalone: true} " (ngModelChange)="changByInput(3)">
+                        <div class="red_backcolor " *ngIf="messages.error[3] ">
+                            {{messages.errorMessages}}
+                        </div>
+                    </div>
+                </div>
+                <div class=" form-group ">
+                    <label class="col-sm-2 control-label ">生日</label>
+                    <div class="col-sm-8 ">
+                        <input type="text " class="form-control " [(ngModel)]="userEdit.birthday " [ngModelOptions]="{standalone: true} " (ngModelChange)="changByInput(3)">
+                        <div class="red_backcolor " *ngIf="messages.error[4] ">
+                            {{messages.errorMessages}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label for=" " class="col-sm-2 control-label ">性别</label>
+                    <div class="col-sm-8 ">
+                        <input type="text " class="form-control " [(ngModel)]="userEdit.sex " [ngModelOptions]="{standalone: true} " (ngModelChange)="changByInput(7)">
+                        <div class="red_backcolor " *ngIf="messages.error[7] ">
+                            {{messages.errorMessages}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label for=" " class="col-sm-2 control-label ">年级</label>
+                    <div class="col-sm-8 ">
+                        <select class="form-control" [(ngModel)]="userEdit.grade" [ngModelOptions]="{standalone: true}" (ngModelChange)="changByInput(5)" (ngModelChange)="changByInput(5)">
+                            <option>--请选择--</option>
+                            <option value="大1年级">大1年级</option>
+                            <option value="大2年级">大2年级</option>
+                            <option value="大3年级">大3年级</option>
+                            <option value="大4年级">大4年级</option>
+                          </select>
+                        <div class="red_backcolor " *ngIf="messages.error[5] ">
+                            {{messages.errorMessages}}
+                        </div>
+                        <!-- <input type="text " class="form-control " [(ngModel)]="userEdit.grade " [ngModelOptions]="{standalone: true} "> -->
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label for=" " class="col-sm-2 control-label ">兴趣</label>
+                    <div class="col-sm-8 ">
+                        <input type="text " class="form-control " [(ngModel)]="userEdit.interest " [ngModelOptions]="{standalone: true} ">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label for=" " class="col-sm-2 control-label ">自我介绍</label>
+                    <div class="col-sm-8 ">
+                        <input type="text " class="form-control " [(ngModel)]="userEdit.introduce " [ngModelOptions]="{standalone: true} ">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default" (click)="Yes()">确定</button>
+                        <button type="submit" class="btn btn-default" (click)="No()">取消</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </ng-template>
+
+</body>

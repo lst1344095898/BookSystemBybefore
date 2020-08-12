@@ -1,0 +1,120 @@
+<body class="back_img" style="margin: 0px;">
+    <div class="hear_div"><span class="hear_text">NameSoHard's library</span>
+        <div class="head_portrait">
+            <img id="heard_img" class="hear_img_before" alt="" src="" (mouseenter)="showUserInfo()">
+            <div id="userInfo" class="user_info">
+                <img class="hear_img_after" alt="">
+                <ul class="list-group heard_ul" style="text-align: center;">
+                    <li class="list-group-item" style="text-decoration:none;"></li>
+                    <li class="list-group-item">{{userInfoHeard.username}}</li>
+                    <li class="list-group-item">{{userInfoHeard.grade}}</li>
+                    <li class="list-group-item">{{userInfoHeard.user_code}}</li>
+                    <li class="list-group-item">
+                        <button class="btn btn-success" (click)="out()">退出</button>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div id="back_div" (mousemove)="exitShow()"></div>
+    </div>
+    <div class="hear_Line"></div>
+    <div class="nav_bar">
+        <div class="">
+            <ul class="nav nav-pills left_meun_div">
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '1' }" (click)="tagClick('1')">查询借阅</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '2' }" (click)="tagClick('2')">归还</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '3' }" (click)="tagClick('3')">图书管理</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '4' }" (click)="tagClick('4')">日志</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '5' }" (click)="tagClick('5')">排行榜</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '6' }" (click)="tagClick('6')">用户管理</li>
+            </ul>
+        </div>
+    </div>
+    <div class="rigth_meun_div">
+        <div class="rigth_content_div">
+            <form class="container form-horizontal  rigth_content_form">
+                <div>
+                    <div class="input-group input_width float_left">
+                        <span class="input-group-addon">用户ID</span>
+                        <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectInfo.userid">
+                    </div>
+                    <div class="input-group input_width float_left">
+                        <span class="input-group-addon">图书ID</span>
+                        <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectInfo.bookid">
+                    </div>
+                    <div class="input-group input_width float_left">
+                        <span class="input-group-addon">书名</span>
+                        <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectInfo.bookName">
+                    </div>
+                    <div class="input-group input_width float_left">
+                        <span class="input-group-addon">作者</span>
+                        <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectInfo.authorName">
+                    </div>
+                    <div class="input-group input_width float_left">
+                        <span class="input-group-addon">出版社</span>
+                        <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectInfo.educationName">
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn  btn-success" (click)="searchByinput(selectInfo)">检索</button>
+                    <button class="btn   btn-default" (click)="reset()">重置</button>
+                </div>
+            </form>
+            <div class="rigth_content_table table-responsive  " *ngIf="borrowBooks">
+                <table id="table_right" class="table">
+                    <thead>
+                        <th>用户ID</th>
+                        <th>图书ID</th>
+                        <th>书名</th>
+                        <th>作者</th>
+                        <th>借阅时间</th>
+                        <th>出版社</th>
+                        <th style="width: 60px;">操作</th>
+                    </thead>
+                    <tbody>
+                        <tr style="height: 70px;" *ngFor="let borrowBook of borrowBooksPage">
+                            <th>{{borrowBook.userid}}</th>
+                            <th>{{borrowBook.bookid}}</th>
+                            <th>{{borrowBook.bookName}}</th>
+                            <th>{{borrowBook.authorName}}</th>
+                            <th>{{borrowBook.startTime}}</th>
+                            <th>{{borrowBook.educationName}}</th>
+                            <button class="btn btn-primary" (click)="Recall(borrowBook)">催还</button>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="page_table">
+                <nav aria-label="Page navigation ">
+                    <ul class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li [ngClass]="{'active': pageNew === page }" *ngFor="let page of pageArry">
+                            <span (click)="changPageByBefor(page)">{{page+1}}</span></li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <br/>
+        </div>
+    </div>
+
+    <div id="back_reacll" class="back">
+    </div>
+    <div id="RecallWindow" class="RecallWindows">
+        <div class="alert alert-success" role="alert" style="text-align: center;">
+            <span>是否对用户id为："{{borrowBookByrecall.userid}}",<br>图书名字为：《{{borrowBookByrecall.bookName}}》进行催还</span><br>
+        </div>
+        <button class="btn btn-success dropdown-toggle" (click)="Yes()" style="margin-left: 190px; margin-right: 30px;">是</button>
+        <button class="btn btn-success dropdown-toggle" (click)="No()">否</button>
+    </div>
+</body>

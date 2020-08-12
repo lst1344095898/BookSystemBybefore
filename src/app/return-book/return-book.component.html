@@ -1,0 +1,58 @@
+<body class="back_img">
+    <div class="hear_div"><span class="hear_text">NameSoHard's library</span>
+        <div class="head_portrait">
+            <img id="heard_img" class="hear_img_before" alt="" src="" (mouseenter)="showUserInfo()">
+            <div id="userInfo" class="user_info">
+                <img class="hear_img_after" alt="">
+                <ul class="list-group heard_ul" style="text-align: center;">
+                    <li class="list-group-item" style="text-decoration:none;"></li>
+                    <li class="list-group-item">{{userInfoHeard.username}}</li>
+                    <li class="list-group-item">{{userInfoHeard.grade}}</li>
+                    <li class="list-group-item">{{userInfoHeard.user_code}}</li>
+                    <li class="list-group-item">
+                        <button class="btn btn-success" (click)="out()">退出</button>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div id="back_div" (mousemove)="exitShow()"></div>
+    </div>
+    <div class="hear_Line"></div>
+    <div class="nav_bar">
+        <div class="">
+            <ul class="nav nav-pills left_meun_div">
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '1' }" (click)="tagClick('1')">查询借阅</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '2' }" (click)="tagClick('2')">归还</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '3' }" (click)="tagClick('3')">图书管理</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '4' }" (click)="tagClick('4')">日志</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '5' }" (click)="tagClick('5')">排行榜</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '6' }" (click)="tagClick('6')">用户管理</li>
+            </ul>
+        </div>
+    </div>
+    <div class="rigth_meun_div">
+        <div class="rigth_content_div ">
+            <form class="container form-horizontal  rigth_content_form">
+                <div class="form-group">
+                    <label for="inputUserId" class="col-sm-2 control-label">用户ID</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="inputUserId" [(ngModel)]="userid" [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputBookId" class="col-sm-2 control-label">图书ID</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="inputBookId" [(ngModel)]="bookid" [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="center-block btn-area" style="margin-left: 250px;">
+                        <button class="btn  btn-default" (click)="returnBook()">归还</button>
+                        <button class="btn  btn-default" (click)="cancel()">取消</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

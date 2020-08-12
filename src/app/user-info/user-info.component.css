@@ -1,0 +1,235 @@
+.back_img {
+    margin: 0px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center 0;
+    opacity: 1.0;
+    background-color: rgb(248, 249, 249);
+    /* background-image: url('../../assets/img/back_6.jpg'); */
+}
+
+.head_portrait {
+    position: absolute;
+    top: 10px;
+    right: 100px;
+    width: 50px;
+    height: 50px;
+}
+
+
+/*  之前 */
+
+.hear_img_before {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    width: 50px;
+    z-index: 3;
+    height: 50px;
+    background-image: url('../../assets/img/heard.png');
+}
+
+.user_info {
+    margin-top: 10px;
+    margin-left: -20px;
+    width: 140px;
+    height: 250px;
+    display: none;
+}
+
+.hear_img_after {
+    position: relative;
+    border-radius: 50%;
+    border: 2px solid steelblue;
+    width: 65px;
+    height: 65px;
+    margin-left: -10px;
+    z-index: 8;
+    background-image: url('../../assets/img/heard_big.png');
+}
+
+.heard_ul {
+    position: relative;
+    z-index: 7;
+    width: 160px;
+    height: 200px;
+    margin-top: -18px;
+    margin-left: -55px;
+}
+
+#back_div {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: 20px;
+    right: 80px;
+    z-index: 2;
+    background-color: teal;
+    opacity: 0.0;
+}
+
+.header_btn {
+    margin-top: 10px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.nav_margin {
+    margin-left: 600px;
+}
+
+.nav_button_color {
+    color: steelblue;
+    /* background-color: #4C59D8; */
+}
+
+.nav_button_color:hover {
+    background-color: rgb(238, 238, 238);
+}
+
+.nav_bar {
+    margin-top: 10px;
+    margin-left: 200px;
+}
+
+.hear_Line {
+    margin-left: 500px;
+    width: 1000px;
+    height: 6px;
+    border-radius: 45%;
+    background-color: slategray;
+}
+
+
+/* margin */
+
+.margin_left_small {
+    margin-left: 10px;
+}
+
+.margin_left_middle {
+    margin-left: 20px;
+}
+
+.margin_left_big {
+    margin-left: 30px;
+}
+
+.margin_left_biglong {
+    margin-left: 100px;
+}
+
+.margin_top_big {
+    margin-top: 40px;
+}
+
+
+/* heigth */
+
+.heith_small {
+    height: 100px;
+}
+
+.heith_middle {
+    height: 200px;
+}
+
+.heith_big {
+    height: 300px;
+}
+
+.heith_biglong {
+    height: 810px;
+}
+
+
+/* postion */
+
+.postion_absolute {
+    position: absolute;
+}
+
+.postion_relative {
+    position: relative;
+}
+
+
+/* float */
+
+.float_left {
+    float: left;
+}
+
+.float_rigth {
+    float: right;
+}
+
+.hear_div {
+    margin-left: 160px;
+    height: 80px;
+}
+
+.left_meun_div {
+    margin-left: 500px;
+}
+
+.div_display {
+    display: inline;
+}
+
+.input_width {
+    width: 150px;
+}
+
+.ul_size {
+    margin-top: 50px;
+    margin-left: 650px;
+    width: 600px;
+    height: 700px;
+}
+
+.ul_style {
+    font-size: 20px;
+}
+
+.page_table {
+    margin-left: 400px;
+    margin-top: 0px;
+}
+
+.hear_text {
+    margin-left: 550px;
+    font-size: 50px;
+    color: #231231;
+}
+
+.RecallWindows {
+    display: none;
+    position: absolute;
+    left: 35%;
+    top: 25%;
+    z-index: 11;
+    width: 500px;
+    height: 300px;
+}
+
+.back {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba(30, 30, 30, 0.5);
+    display: none;
+}
+
+.window_content {
+    margin-left: 150px;
+    margin-top: 30px;
+}

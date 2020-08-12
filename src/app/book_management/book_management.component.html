@@ -1,0 +1,171 @@
+<body class="back_img" style="margin: 0px;">
+    <div class="hear_div"><span class="hear_text">NameSoHard's library</span>
+        <div class="head_portrait">
+            <img id="heard_img" class="hear_img_before" alt="" src="" (mouseenter)="showUserInfo()">
+            <div id="userInfo" class="user_info">
+                <img class="hear_img_after" alt="">
+                <ul class="list-group heard_ul" style="text-align: center;">
+                    <li class="list-group-item" style="text-decoration:none;"></li>
+                    <li class="list-group-item">{{userInfoHeard.username}}</li>
+                    <li class="list-group-item">{{userInfoHeard.grade}}</li>
+                    <li class="list-group-item">{{userInfoHeard.user_code}}</li>
+                    <li class="list-group-item">
+                        <button class="btn btn-success" (click)="out()">退出</button>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div id="back_div" (mousemove)="exitShow()"></div>
+    </div>
+    <div class="hear_Line"></div>
+    <div class="nav_bar">
+        <div class="">
+            <ul class="nav nav-pills left_meun_div">
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '1' }" (click)="tagClick('1')">查询借阅</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '2' }" (click)="tagClick('2')">归还</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '3' }" (click)="tagClick('3')">图书管理</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '4' }" (click)="tagClick('4')">日志</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '5' }" (click)="tagClick('5')">排行榜</li>
+                <li class="list-group-item nav_button_color " [ngClass]="{'active_li': type === '6' }" (click)="tagClick('6')">用户管理</li>
+            </ul>
+        </div>
+    </div>
+    <div class="rigth_meun_div">
+        <div class="rigth_content_div ">
+            <form class="container form-horizontal  rigth_content_form">
+                <div>
+                    <div class="input-group input_width float_left">
+                        <span class="input-group-addon">图书ID</span>
+                        <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="pram.bookid">
+                    </div>
+                    <div class="input-group input_width float_left">
+                        <span class="input-group-addon">书名</span>
+                        <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="pram.bookName">
+                    </div>
+                    <div class="input-group input_width float_left">
+                        <span class="input-group-addon">作者</span>
+                        <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="pram.authorName">
+                    </div>
+                    <div class="input-group input_width float_left">
+                        <span class="input-group-addon">出版社</span>
+                        <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="pram.educationName">
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn  btn-success" (click)="searchByPram()">检索</button>
+                    <button class="btn   btn-default" (click)="insert(template)">新增</button>
+                </div>
+            </form>
+
+            <div class=" rigth_content_table table-responsive" *ngIf="booksByParm">
+                <table id="table_right" class="table ">
+                    <thead>
+                        <th>图书ID</th>
+                        <th>书名</th>
+                        <th>作者</th>
+                        <th>出版社</th>
+                        <th>剩余数量</th>
+                        <th>操作</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let book of booksByParm">
+                            <td>{{ book.bookid }}</td>
+                            <td>{{ book.bookName }}</td>
+                            <td>{{ book.authorName }}</td>
+                            <td>{{ book.educationName }}</td>
+                            <td>{{ book.quantity }}</td>
+                            <td><button btn btn-primary (click)="edit(template, book)">编辑</button></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li>
+                                    <a href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li [ngClass]="{'active': pageNew === page }" *ngFor="let page of pageArry">
+                                    <span (click)="changPageByAfter(page)">{{page+1}}</span></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #template>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">图书信息编辑</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+        </div>
+        <div class="modal-content">
+            <form action="" class="form-horizontal col-sm-20">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">图书ID</label>
+                    <div class="col-sm-8" *ngIf="off == true ">
+                        <input type="text" id="inputBookidRef" class="form-control" [(ngModel)]="selectedBook.bookid" [ngModelOptions]="{standalone: true}" (ngModelChange)="change()" readonly>
+                        <div *ngIf="error.book_id.emty == false">
+                            <h4 style="color: red;">值不能为空</h4>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-8" *ngIf="off == false ">
+                        <input type="text" id="inputBookidRef" class="form-control" [(ngModel)]="selectedBook.bookid" [ngModelOptions]="{standalone: true}" (ngModelChange)="change()">
+                        <div *ngIf="error.book_id.emty == false">
+                            <h4 style="color: red;">值不能为空</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">书名</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" [(ngModel)]="selectedBook.bookName" [ngModelOptions]="{standalone: true}" (ngModelChange)="change()">
+                        <div *ngIf="error.bookName.emty == false">
+                            <h4 style="color: red;">值不能为空</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">作者</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" [(ngModel)]="selectedBook.authorName" [ngModelOptions]="{standalone: true}" (ngModelChange)="change()">
+                        <div *ngIf="error.authorName.emty == false">
+                            <h4 style="color: red;">值不能为空</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">出版社</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" [(ngModel)]="selectedBook.educationName" [ngModelOptions]="{standalone: true}" (ngModelChange)="change()">
+                        <div *ngIf="error.educationName.emty == false">
+                            <h4 style="color: red;">值不能为空</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">库存</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" [(ngModel)]="selectedBook.quantity" [ngModelOptions]="{standalone: true}" (ngModelChange)="change()">
+                        <div *ngIf="error.quantity.emty == false">
+                            <h4 style="color: red;">库存不能为0</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="center-block btn-area">
+                    <button class="btn col-sm-5 btn-primary" (click)="save()">保存</button>
+                </div>
+            </form>
+        </div>
+    </ng-template>
+</body>
